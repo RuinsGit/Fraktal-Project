@@ -1,24 +1,24 @@
-<header id="page-topbar" style="background: linear-gradient(to right, #134e5e, #71b280); box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+<header id="page-topbar" style="background: purple">
     <div class="navbar-header">
         <div class="d-flex">
             <!-- LOGO -->
             <div class="navbar-brand-box" style="background: transparent;">
                 <a href="{{ route('admin.dashboard') }}" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="{{ asset('back/assets/images/logo-eneraz.webp') }}" alt="logo-sm" height="25">
+                        <img src="{{ asset('back/assets/images/logo.webp') }}" alt="logo-sm" height="25">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ asset('back/assets/images/logo-eneraz.webp') }}" alt="logo-dark" height="50">
+                        <img src="{{ asset('back/assets/images/logo.webp') }}" alt="logo-dark" height="50">
                     </span>
                 </a>
 
                 <a href="{{ route('admin.dashboard') }}" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="{{ asset('back/assets/images/logo-eneraz.webp') }}" alt="logo-sm-light"
+                        <img src="{{ asset('back/assets/images/logo.webp') }}" alt="logo-sm-light"
                             height="25">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ asset('back/assets/images/logo-eneraz.webp') }}" alt="logo-light" height="50">
+                        <img src="{{ asset('back/assets/images/logo.webp') }}" alt="logo-light" height="50">
                     </span>
                 </a>
             </div>
@@ -32,7 +32,7 @@
                 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" 
                     style="color: white; border-radius: 8px; padding: 8px 15px;">
-                    <img width="35" class="rounded-circle" src="{{ asset('back/assets/images/logo-eneraz.webp') }}" alt="Header Avatar">
+                        <img width="35" class="rounded-circle" src="{{ asset('back/assets/images/logo.webp') }}" alt="Header Avatar">
                     <span class="d-none d-xl-inline-block ms-1" style="color: white;">{{ auth()->guard('admin')->user()->name }}</span>
                     <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                 </button>

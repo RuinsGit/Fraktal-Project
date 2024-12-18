@@ -44,6 +44,8 @@ class StudyProgramController extends Controller
             'description_ru' => 'required',
         ]);
 
+        $imagePath = null;
+
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $destinationPath = public_path('uploads');

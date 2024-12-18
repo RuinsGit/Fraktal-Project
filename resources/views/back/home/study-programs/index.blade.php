@@ -86,9 +86,9 @@
                                                             <tr>
                                                                 <td>{{ $loop->iteration }}</td>
                                                                 <td>
-                                                                    <img src="{{ asset('uploads/study-programs/' . $program->image) }}" 
-                                                                         alt="Program Image" 
-                                                                         width="100">
+                                                                    @if($program->image)
+                                                                        <img src="{{ asset($program->image) }}" alt="Program Image" style="max-width: 100px">
+                                                                    @endif
                                                                 </td>
                                                                 <td>{{ $program->name_az }}</td>
                                                                 <td>{{ Str::limit($program->text_az, 50) }}</td>
@@ -135,9 +135,9 @@
                                                             <tr>
                                                                 <td>{{ $loop->iteration }}</td>
                                                                 <td>
-                                                                    <img src="{{ asset('uploads/study-programs/' . $program->image) }}" 
-                                                                         alt="Program Image" 
-                                                                         width="100">
+                                                                    @if($program->image)
+                                                                        <img src="{{ asset($program->image) }}" alt="Program Image" style="max-width: 100px">
+                                                                    @endif
                                                                 </td>
                                                                 <td>{{ $program->name_en }}</td>
                                                                 <td>{{ Str::limit($program->text_en, 50) }}</td>
@@ -184,9 +184,9 @@
                                                             <tr>
                                                                 <td>{{ $loop->iteration }}</td>
                                                                 <td>
-                                                                    <img src="{{ asset('uploads/study-programs/' . $program->image) }}" 
-                                                                         alt="Program Image" 
-                                                                         width="100">
+                                                                    @if($program->image)
+                                                                        <img src="{{ asset($program->image) }}" alt="Program Image" style="max-width: 100px">
+                                                                    @endif
                                                                 </td>
                                                                 <td>{{ $program->name_ru }}</td>
                                                                 <td>{{ Str::limit($program->text_ru, 50) }}</td>

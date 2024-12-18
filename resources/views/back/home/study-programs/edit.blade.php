@@ -23,7 +23,7 @@
                 <div class="col-xl-12">
                     <div class="card">
                         <div class="card-body">
-                            <form class="needs-validation" method="POST" action="{{ route('admin.home.study-programs.update', $program->id) }}" enctype="multipart/form-data">
+                            <form action="{{ route('admin.home.study-programs.update', $program->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 
@@ -127,9 +127,11 @@
                                 <!-- Mevcut Resim -->
                                 <div class="mb-3">
                                     <label class="form-label">Mövcud Şəkil</label>
-                                    <div>
-                                        <img src="{{ asset('uploads/study-programs/' . $program->image) }}" alt="Current Image" class="img-thumbnail" style="max-width: 200px">
-                                    </div>
+                                    @if($program->image)
+                                        <div class="mb-2">
+                                            <img src="{{ asset($program->image) }}" alt="Current Image" style="max-width: 200px">
+                                        </div>
+                                    @endif
                                 </div>
 
                                 <!-- Yeni Resim -->

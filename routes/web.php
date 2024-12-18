@@ -270,9 +270,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
                 Route::get('/create', [StudyProgramController::class, 'create'])->name('create');
                 Route::post('/store', [StudyProgramController::class, 'store'])->name('store');
                 Route::get('/edit/{id}', [StudyProgramController::class, 'edit'])->name('edit');
-                Route::post('/update/{id}', [StudyProgramController::class, 'update'])->name('update');
-                Route::get('/destroy/{id}', [StudyProgramController::class, 'destroy'])->name('destroy');
-                Route::get('/status/{id}', [StudyProgramController::class, 'status'])->name('status');
+                Route::put('/update/{id}', [StudyProgramController::class, 'update'])->name('update');
+                Route::delete('/destroy/{id}', [StudyProgramController::class, 'destroy'])->name('destroy');
+                Route::post('/status/{id}', [StudyProgramController::class, 'status'])->name('status');
             });
 
             // Study Program Content Routes

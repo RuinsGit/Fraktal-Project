@@ -4,7 +4,7 @@
         <!-- User details -->
         <div class="user-profile text-center mt-3">
             <div class="">
-                <img src="{{ asset('back/assets/images/logo-eneraz.webp') }}" width="80" alt="">
+                <img src="{{ asset('back/assets/images/logo.webp') }}" width="80" alt="">
             </div>
             <div class="mt-3">
                 <h4 class="font-size-16 mb-1">{{ auth()->user()->name }}</h4>
