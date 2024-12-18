@@ -37,6 +37,7 @@ use App\Http\Controllers\Api\HeaderController;
 use App\Http\Controllers\Api\HomeTitleController;
 use App\Http\Controllers\Api\BlogTypeController;
 use App\Http\Controllers\Api\StudyContentController;
+use App\Http\Controllers\Api\TranslationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -170,6 +171,7 @@ Route::prefix('gallery-videos')->group(function () {
 // About Routes
 Route::get('/about', [AboutController::class, 'index']);
 
+Route::apiResource('translations', TranslationController::class);
 // Contact Routes
 Route::get('/contact', [ContactController::class, 'index']);
 
@@ -208,6 +210,8 @@ Route::group(['prefix' => 'v1'], function () {
     Route::get('blog-types', [BlogTypeController::class, 'index']);
     Route::get('blog-types/{id}', [BlogTypeController::class, 'show']);
 });
+
+
 
 
 

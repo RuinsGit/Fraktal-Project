@@ -40,6 +40,7 @@ use App\Http\Controllers\Admin\ContactTitleController;
 use App\Http\Controllers\Admin\HomeTitleController;
 use App\Http\Controllers\Admin\BlogTypeController;
 use App\Http\Controllers\Admin\StudyContentController;
+use App\Http\Controllers\Admin\TranslationController;
 
 
 
@@ -501,5 +502,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::delete('/destroy/{id}', [StudyContentController::class, 'destroy'])->name('destroy');
             Route::get('/status/{id}', [StudyContentController::class, 'status'])->name('status');
         });
+
+        Route::resource('translations', TranslationController::class);
     });
 });

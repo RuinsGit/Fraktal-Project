@@ -215,6 +215,13 @@
                 </li>
 
                 <li>
+                    <a href="{{ route('admin.translations.index') }}" class="waves-effect">
+                        <i class="ri-translate"></i>
+                        <span>Tərcümələr</span>
+                    </a>
+                </li>
+
+                <li>
                     <a href="{{ route('admin.blog.index') }}" class="waves-effect">
                         <i class="ri-article-line"></i>
                         <span>Xəbərlər</span>
