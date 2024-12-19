@@ -129,7 +129,7 @@
 
                                 <div class="col-md-12 mb-3">
                                     <label class="form-label">İkon 1</label>
-                                    <input type="file" name="icon_1" class="form-control @error('icon_1') is-invalid @enderror">
+                                    <input type="file" name="icon_1" class="form-control @error('icon_1') is-invalid @enderror" accept="image/gif">
                                     @error('icon_1')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                     @if($vision->icon_1)
                                         <div class="mt-2">
@@ -140,7 +140,7 @@
 
                                 <div class="col-md-12 mb-3">
                                     <label class="form-label">İkon 2</label>
-                                    <input type="file" name="icon_2" class="form-control @error('icon_2') is-invalid @enderror">
+                                    <input type="file" name="icon_2" class="form-control @error('icon_2') is-invalid @enderror" accept="image/gif">
                                     @error('icon_2')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                     @if($vision->icon_2)
                                         <div class="mt-2">

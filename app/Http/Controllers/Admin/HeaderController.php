@@ -109,6 +109,8 @@ class HeaderController extends Controller
     {
         try {
             $header = Header::findOrFail($id);
+
+            // Resim güncelleme
             if ($request->hasFile('image')) {
                 // Eski ana resmi sil
                 if ($header->image && File::exists(public_path($header->image))) {
@@ -117,17 +119,11 @@ class HeaderController extends Controller
 
                 $mainImage = $request->file('image');
                 $destinationPath = public_path('uploads/headers');
-                $originalFileName = pathinfo($mainImage->getClientOriginalName(), PATHINFO_FILENAME);
-                $mainImageName = time() . '_header_' . $originalFileName . '.webp';
+                $mainImageName = time() . '_header_' . uniqid() . '.' . $mainImage->getClientOriginalExtension(); // Orijinal uzantıyı koru
 
-                $imageResource = imagecreatefromstring(file_get_contents($mainImage));
-                $webpPath = $destinationPath . '/' . $mainImageName;
-
-                if ($imageResource) {
-                    imagewebp($imageResource, $webpPath, 80);
-                    imagedestroy($imageResource);
-                    $header->image = 'uploads/headers/' . $mainImageName;
-                }
+                // Resmi olduğu gibi kaydet
+                $mainImage->move($destinationPath, $mainImageName);
+                $header->image = 'uploads/headers/' . $mainImageName; // Veritabanına kaydet
             }
 
             // Diğer alanları güncelle

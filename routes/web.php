@@ -41,6 +41,7 @@ use App\Http\Controllers\Admin\HomeTitleController;
 use App\Http\Controllers\Admin\BlogTypeController;
 use App\Http\Controllers\Admin\StudyContentController;
 use App\Http\Controllers\Admin\TranslationController;
+use App\Http\Controllers\Admin\CourseTypeController;
 
 
 

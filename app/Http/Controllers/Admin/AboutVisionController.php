@@ -35,14 +35,14 @@ class AboutVisionController extends Controller
             'text_1_az' => 'required|string',
             'text_1_en' => 'nullable|string',
             'text_1_ru' => 'nullable|string',
-            'icon_2' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'icon_2' => 'required|image|mimes:jpeg,png,jpg,gif|max:10240',
             'name_2_az' => 'required|string|max:255',
             'name_2_en' => 'nullable|string|max:255',
             'name_2_ru' => 'nullable|string|max:255',
             'text_2_az' => 'required|string',
             'text_2_en' => 'nullable|string',
             'text_2_ru' => 'nullable|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:10240',
             'status' => 'required|boolean'
         ]);
 
@@ -92,91 +92,73 @@ class AboutVisionController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'icon_1' => 'nullable|file|mimes:gif|max:2048',
+            'icon_2' => 'nullable|file|mimes:gif|max:2048',
+            // ... diğer validasyonlar ...
+        ]);
+
         try {
             $vision = AboutVision::findOrFail($id);
             $data = $request->all();
 
+            // İkon 1 için
             if ($request->hasFile('icon_1')) {
+                // Eski dosyayı sil
                 if ($vision->icon_1 && File::exists(public_path($vision->icon_1))) {
                     File::delete(public_path($vision->icon_1));
                 }
 
                 $file = $request->file('icon_1');
                 $destinationPath = public_path('uploads/about/vision');
-                $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                $webpFileName = time() . '_icon1_' . $originalFileName . '.webp';
+                $gifFileName = time() . '_icon1_' . uniqid() . '.gif';
 
+                // Dizin kontrolü
                 if (!File::exists($destinationPath)) {
                     File::makeDirectory($destinationPath, 0777, true);
                 }
 
-                $imageResource = imagecreatefromstring(file_get_contents($file));
-                $webpPath = $destinationPath . '/' . $webpFileName;
-
-                if ($imageResource) {
-                    imagewebp($imageResource, $webpPath, 80);
-                    imagedestroy($imageResource);
-                    $vision->icon_1 = 'uploads/about/vision/' . $webpFileName;
-                }
+                // GIF dosyasını olduğu gibi kaydet
+                $file->move($destinationPath, $gifFileName);
+                $data['icon_1'] = 'uploads/about/vision/' . $gifFileName;
             }
 
+            // İkon 2 için
             if ($request->hasFile('icon_2')) {
+                // Eski dosyayı sil
                 if ($vision->icon_2 && File::exists(public_path($vision->icon_2))) {
                     File::delete(public_path($vision->icon_2));
                 }
 
                 $file = $request->file('icon_2');
                 $destinationPath = public_path('uploads/about/vision');
-                $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                $webpFileName = time() . '_icon2_' . $originalFileName . '.webp';
+                $gifFileName = time() . '_icon2_' . uniqid() . '.gif';
 
+                // Dizin kontrolü
                 if (!File::exists($destinationPath)) {
                     File::makeDirectory($destinationPath, 0777, true);
                 }
 
-                $imageResource = imagecreatefromstring(file_get_contents($file));
-                $webpPath = $destinationPath . '/' . $webpFileName;
-
-                if ($imageResource) {
-                    imagewebp($imageResource, $webpPath, 80);
-                    imagedestroy($imageResource);
-                    $vision->icon_2 = 'uploads/about/vision/' . $webpFileName;
-                }
+                // GIF dosyasını olduğu gibi kaydet
+                $file->move($destinationPath, $gifFileName);
+                $data['icon_2'] = 'uploads/about/vision/' . $gifFileName;
             }
 
+            // Normal resim güncelleme işlemi
             if ($request->hasFile('image')) {
+                // Eski resmi sil
                 if ($vision->image && File::exists(public_path($vision->image))) {
                     File::delete(public_path($vision->image));
                 }
 
-                $file = $request->file('image');
-                $destinationPath = public_path('uploads/about/vision');
-                $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                $webpFileName = time() . '_' . $originalFileName . '.webp';
-
-                if (!File::exists($destinationPath)) {
-                    File::makeDirectory($destinationPath, 0777, true);
-                }
-
-                $imageResource = imagecreatefromstring(file_get_contents($file));
-                $webpPath = $destinationPath . '/' . $webpFileName;
-
-                if ($imageResource) {
-                    imagewebp($imageResource, $webpPath, 80);
-                    imagedestroy($imageResource);
-                    $vision->image = 'uploads/about/vision/' . $webpFileName;
-                }
+                $image = $request->file('image');
+                $imageName = Str::uuid() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('uploads/about/vision'), $imageName);
+                $data['image'] = 'uploads/about/vision/' . $imageName;
             }
 
-            $vision->fill($request->only([
-                'name_1_az', 'name_1_en', 'name_1_ru',
-                'text_1_az', 'text_1_en', 'text_1_ru',
-                'name_2_az', 'name_2_en', 'name_2_ru',
-                'text_2_az', 'text_2_en', 'text_2_ru',
-                'status'
-            ]));
-
-            $vision->save();
+            // Veritabanını güncelle
+            $vision->update($data);
 
             return redirect()
                 ->route('admin.about.vision.index')
