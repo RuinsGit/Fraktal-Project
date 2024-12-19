@@ -264,16 +264,16 @@
         </li>
 
                 <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-gallery-line"></i>
-                        <span>Qaleriya Content</span>
+                    <!-- <a href="javascript: void(0);" class="has-arrow waves-effect"> -->
+                        <!-- <i class="ri-gallery-line"></i> -->
+                        <!-- <span>Qaleriya Content</span> -->
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                        
                         <li>
-            <a href="{{ route('admin.gallery-video.index') }}">
-                <i class="ri-video-line"></i>
-                Videolar
+            <!-- <a href="{{ route('admin.gallery-video.index') }}"> -->
+                <!-- <i class="ri-video-line"></i> -->
+                <!-- Videolar -->
             </a>
         </li>
                         
