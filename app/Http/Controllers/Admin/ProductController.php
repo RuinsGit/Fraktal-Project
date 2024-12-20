@@ -220,43 +220,39 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
+        DB::beginTransaction();
         try {
             $product = Product::findOrFail($id);
-            $data = $request->validated();
-
             
-            $data['discount_percentage'] = $data['discount_percentage'] ?? 0;
+            // validate() metodunu kullanarak doğrulama yapın
+            $data = $request->validate([
+                'name_az' => 'required|string|max:255',
+                'name_en' => 'required|string|max:255',
+                'name_ru' => 'required|string|max:255',
+                'title_az' => 'required|string|max:255',
+                'title_en' => 'required|string|max:255',
+                'title_ru' => 'required|string|max:255',
+                'description_az' => 'required|string',
+                'description_en' => 'required|string',
+                'description_ru' => 'required|string',
+                'category_id' => 'required|exists:categories,id',
+                'price' => 'required|numeric',
+                'discount_percentage' => 'nullable|numeric|min:0|max:100',
+                'status' => 'required|boolean',
+                'order' => 'nullable|integer',
+                'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            ]);
 
-            
             if ($request->hasFile('thumbnail')) {
-               
                 if ($product->thumbnail && file_exists(public_path($product->thumbnail))) {
                     unlink(public_path($product->thumbnail));
                 }
-
-                
-                $image = $request->file('thumbnail');
-                $imageName = time() . '.' . $image->getClientOriginalExtension();
-                
-                
-                if (!file_exists(public_path('uploads/products'))) {
-                    mkdir(public_path('uploads/products'), 0777, true);
-                }
-                
-                $image->move(public_path('uploads/products'), $imageName);
-                $data['thumbnail'] = 'uploads/products/' . $imageName;
+                $data['thumbnail'] = $this->uploadImage($request->file('thumbnail'), 'products');
             }
 
-            
             $price = floatval($request->price);
             $discountPercentage = floatval($request->discount_percentage ?? 0);
-            
-            
-            $discountedPrice = $price;
-            if ($discountPercentage > 0) {
-                $discountAmount = ($price * $discountPercentage) / 100;
-                $discountedPrice = $price - $discountAmount;
-            }
+            $discountedPrice = $this->calculateDiscountedPrice($price, $discountPercentage);
 
             $product->update([
                 'name_az' => $data['name_az'],
