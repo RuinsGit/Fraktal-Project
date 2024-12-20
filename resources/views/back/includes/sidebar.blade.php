@@ -56,17 +56,17 @@
                             </a>
                         </li>
                         <li>
-    <a href="{{ route('admin.study-content.index') }}" class="waves-effect">
+    <!-- <a href="{{ route('admin.study-content.index') }}" class="waves-effect">
         <i class="fas fa-graduation-cap"></i>
         <span>Təhsil Məzmunu</span>
     </a>
-</li>
-                        <li>
+</li> -->
+                        <!-- <li>
                             <a href="{{ route('admin.home.company-names.index') }}">
                                 <i class="ri-building-line"></i>
                                 Şirkət Haqqında
                             </a>
-                        </li>
+                        </li> -->
                         <li>
                             <a href="{{ route('admin.home.advantages.index') }}">
                                 <i class="ri-award-line"></i>
@@ -110,12 +110,12 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
 
-                    <li>
+                    <!-- <li>
             <a href="{{ route('admin.home.title.index') }}">
                 <i class="ri-text-spacing"></i>
                 Başlıqlar
             </a>
-        </li>
+        </li> -->
                         <li>
                             <a href="{{ route('admin.course.index') }}">
                                 <i class="ri-book-open-line"></i>
@@ -141,25 +141,25 @@
                             </a>
                         </li>
 
-                        <li>
+                        <!-- <li>
                             <a href="{{ route('admin.gallery-title.index') }}">
                                 <i class="ri-text-wrap"></i>
                                 Qalereya Başlığı
                             </a>
-                        </li>
-                        <li>
+                        </li> -->
+                        <!-- <li>
             <a href="{{ route('admin.contact-title.index') }}">
                 <i class="ri-text-wrap"></i>
                 Əlaqə Başlıqları
             </a>
-        </li>
+        </li> -->
 
-                        <li>
+                        <!-- <li>
             <a href="{{ route('admin.blog-title.index') }}">
                 <i class="ri-text-wrap"></i>
                 Blog Başlığı
             </a>
-        </li>
+        </li> -->
 
         
                         
