@@ -141,6 +141,13 @@
                             </a>
                         </li>
 
+                        <li>
+                    <a href="{{ route('admin.human-design.index') }}" class="waves-effect">
+                        <i class="ri-user-heart-line"></i>
+                        <span>İnsan Dizaynı Başlığı</span>
+                    </a>
+                </li>
+
                         <!-- <li>
                             <a href="{{ route('admin.gallery-title.index') }}">
                                 <i class="ri-text-wrap"></i>
@@ -169,16 +176,11 @@
                 <li>
                     <a href="{{ route('admin.psychology-text.index') }}" class="waves-effect">
                         <i class="ri-file-text-line"></i>
-                        <span>Psixologiya Mətnləri</span>
+                        <span>Psixologiya Məzmunu</span>
                     </a>
                 </li>
 
-                <li>
-                    <a href="{{ route('admin.human-design.index') }}" class="waves-effect">
-                        <i class="ri-user-heart-line"></i>
-                        <span>İnsan Dizaynı</span>
-                    </a>
-                </li>
+                
                 <li>
                     <a href="{{ route('admin.human-content.index') }}">
                         <i class="ri-user-heart-line"></i>
@@ -214,12 +216,7 @@
                     </a>
                 </li>
 
-                <li>
-                    <a href="{{ route('admin.translations.index') }}" class="waves-effect">
-                        <i class="ri-translate"></i>
-                        <span>Tərcümələr</span>
-                    </a>
-                </li>
+                
 
                 <li>
                     <a href="{{ route('admin.blog.index') }}" class="waves-effect">
@@ -227,13 +224,19 @@
                         <span>Xəbərlər</span>
                     </a>
                 </li>
-
                 <li>
+            <a href="{{ route('admin.blog-types.index') }}" class="{{ Route::is('admin.blog-types.*') ? 'active' : '' }}">
+                <i class="ri-list-check"></i>
+                Xəbər Növləri
+            </a>
+        </li>
+
+                <!-- <li>
                     <a href="{{ route('admin.order.index') }}" class="waves-effect">
                         <i class="ri-shopping-basket-line"></i>
                         <span>Sifarişlər</span>
                     </a>
-                </li>
+                </li> -->
 
                 <li>
                     <a href="{{ route('admin.comment.index') }}" class="waves-effect">
@@ -256,14 +259,17 @@
                     </a>
                 </li>
 
-                <li>
-            <a href="{{ route('admin.blog-types.index') }}" class="{{ Route::is('admin.blog-types.*') ? 'active' : '' }}">
-                <i class="ri-list-check"></i>
-                Blog Növləri
-            </a>
-        </li>
+
+
+        <li>
+                    <a href="{{ route('admin.translations.index') }}" class="waves-effect">
+                        <i class="ri-translate"></i>
+                        <span>Tərcümələr</span>
+                    </a>
+                </li>
 
                 <li>
+
                     <!-- <a href="javascript: void(0);" class="has-arrow waves-effect"> -->
                         <!-- <i class="ri-gallery-line"></i> -->
                         <!-- <span>Qaleriya Content</span> -->
@@ -304,6 +310,12 @@
                                 Əlaqə müraciətləri
                             </a>
                         </li>
+                        <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.course-route.index') }}">
+            <i class="fas fa-fw fa-book"></i>
+            <span>Kurs Yolları</span>
+        </a>
+    </li>
                     </ul>
                 </li>
             </ul>

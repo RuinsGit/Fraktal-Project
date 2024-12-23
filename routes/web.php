@@ -42,6 +42,8 @@ use App\Http\Controllers\Admin\BlogTypeController;
 use App\Http\Controllers\Admin\StudyContentController;
 use App\Http\Controllers\Admin\TranslationController;
 use App\Http\Controllers\Admin\CourseTypeController;
+use App\Http\Controllers\Admin\CourseRouteController;
+
 
 
 
@@ -505,5 +507,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
 
         Route::resource('translations', TranslationController::class);
+
+        Route::resource('course-route', CourseRouteController::class);
     });
 });
