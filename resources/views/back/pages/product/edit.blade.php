@@ -64,10 +64,9 @@
 
                                     <div class="mb-3">
                                         <label>Təsvir (AZ)</label>
-                                        <textarea name="description_az" class="form-control summernote">
-                                            {{ old('description_az', $product->description_az) }}
-                                        </textarea>
+                                        <textarea name="description_az" class="form-control summernote">{{ old('description_az', $product->description_az) }}</textarea>
                                         @error('description_az')<div class="text-danger">{{ $message }}</div>@enderror
+
                                     </div>
                                 </div>
 
@@ -87,10 +86,10 @@
 
                                     <div class="mb-3">
                                         <label>Təsvir (EN)</label>
-                                        <textarea name="description_en" class="form-control summernote">
-                                            {{ old('description_en', $product->description_en) }}
-                                        </textarea>
+                                        <textarea name="description_en" class="form-control summernote">{{ old('description_en', $product->description_en) }}</textarea>
+                                            
                                         @error('description_en')<div class="text-danger">{{ $message }}</div>@enderror
+
                                     </div>
                                 </div>
 
@@ -110,10 +109,9 @@
 
                                     <div class="mb-3">
                                         <label>Təsvir (RU)</label>
-                                        <textarea name="description_ru" class="form-control summernote">
-                                            {{ old('description_ru', $product->description_ru) }}
-                                        </textarea>
+                                        <textarea name="description_ru" class="form-control summernote">{{ old('description_ru', $product->description_ru) }}</textarea>
                                         @error('description_ru')<div class="text-danger">{{ $message }}</div>@enderror
+
                                     </div>
                                 </div>
                             </div>
@@ -314,6 +312,19 @@
 
         $('.form-select').select2();
 
+        // Boşlukları temizleyen fonksiyon
+        function cleanTextAreaContent() {
+            const textareas = document.querySelectorAll('textarea');
+            textareas.forEach(textarea => {
+                textarea.value = textarea.value.trim(); // Başındaki ve sonundaki boşlukları temizle
+            });
+        }
+
+        // Form submit kontrolü
+        document.getElementById('productForm').addEventListener('submit', function(e) {
+            cleanTextAreaContent(); // Form gönderilmeden önce boşlukları temizle
+        });
+
         $('#productForm').on('submit', function(e) {
             e.preventDefault();
             
@@ -454,7 +465,7 @@
             }
         });
 
-        if (!hasVideo) {
+        if (!hasVideo && videoFiles.length > 0) {
             e.preventDefault();
             Swal.fire({
                 icon: 'error',
@@ -575,12 +586,6 @@
             }
         });
     });
-
-    function clearVideoInputs() {
-        const videoList = document.getElementById('videoList');
-        videoList.innerHTML = ''; // Tüm video girişlerini temizle
-        updateRemoveButtons(); // Silme butonlarını güncelle
-    }
 </script>
 @endpush
 
@@ -613,6 +618,7 @@
 .card-body {
     padding: 2rem;
 }
+
 
 /* Form Elemanları */
 .form-control, .form-select {

@@ -225,7 +225,7 @@ class ProductController extends Controller
         try {
             $product = Product::findOrFail($id);
             
-            // validate() metodunu kullanarak doğrulama yapın
+            // Validate the request
             $data = $request->validate([
                 'name_az' => 'required|string|max:255',
                 'name_en' => 'required|string|max:255',
@@ -244,6 +244,9 @@ class ProductController extends Controller
                 'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
             ]);
 
+            // Trim the description to remove unnecessary spaces
+            $data['description_az'] = trim($data['description_az']);
+            
             if ($request->hasFile('thumbnail')) {
                 if ($product->thumbnail && file_exists(public_path($product->thumbnail))) {
                     unlink(public_path($product->thumbnail));
