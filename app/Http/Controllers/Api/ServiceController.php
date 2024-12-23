@@ -13,8 +13,8 @@ class ServiceController extends Controller
     {
         try {
             $services = Service::where('status', true)
-                             ->latest()
-                             ->get();
+                               ->latest()
+                               ->get();
 
             if ($services->isEmpty()) {
                 return response()->json([
@@ -56,4 +56,6 @@ class ServiceController extends Controller
             ], 404);
         }
     }
+
+    // Diğer metodlar (create, store, update, delete) burada yer alabilir
 } 

@@ -38,7 +38,7 @@ use App\Http\Controllers\Api\HomeTitleController;
 use App\Http\Controllers\Api\BlogTypeController;
 use App\Http\Controllers\Api\StudyContentController;
 use App\Http\Controllers\Api\TranslationController;
-
+use App\Http\Controllers\Api\FooterController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -132,8 +132,9 @@ Route::prefix('human-contents')->group(function () {
 Route::prefix('services')->group(function () {
     Route::get('/', [ServiceController::class, 'index']);
     Route::get('/{slug}', [ServiceController::class, 'show']);
+    
 });
-
+Route::get('/footer', [FooterController::class, 'index']);
 // Blog Routes
 Route::prefix('blogs')->group(function () {
     Route::get('/', [BlogController::class, 'index']);
@@ -210,6 +211,8 @@ Route::group(['prefix' => 'v1'], function () {
     Route::get('blog-types', [BlogTypeController::class, 'index']);
     Route::get('blog-types/{id}', [BlogTypeController::class, 'show']);
 });
+
+
 
 
 
