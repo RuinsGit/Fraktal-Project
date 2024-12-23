@@ -263,6 +263,9 @@
                                         <button type="button" class="btn btn-success" onclick="addNewVideo()">
                                             <i class="fas fa-plus me-1"></i> Yeni Video Əlavə Et
                                         </button>
+                                        <button type="button" class="btn btn-warning" onclick="clearVideoInputs()">
+                                            <i class="fas fa-times me-1"></i> Bütün Videoları Təmizlə
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -572,6 +575,12 @@
             }
         });
     });
+
+    function clearVideoInputs() {
+        const videoList = document.getElementById('videoList');
+        videoList.innerHTML = ''; // Tüm video girişlerini temizle
+        updateRemoveButtons(); // Silme butonlarını güncelle
+    }
 </script>
 @endpush
 
