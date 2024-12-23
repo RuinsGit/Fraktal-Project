@@ -214,8 +214,9 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
         $categories = Category::all();
+        $courseTypes = CourseType::all();
         
-        return view('back.pages.product.edit', compact('product', 'categories'));
+        return view('back.pages.product.edit', compact('product', 'categories', 'courseTypes'));
     }
 
     public function update(Request $request, $id)
@@ -475,12 +476,13 @@ class ProductController extends Controller
         try {
             $video = ProductVideo::findOrFail($id);
             
-            
-            if ($video->video_path && file_exists(public_path($video->video_path))) {
-                unlink(public_path($video->video_path));
+            // Video dosyasını sil
+            $videoPath = public_path('uploads/product-videos/' . $video->video_path);
+            if (file_exists($videoPath)) {
+                unlink($videoPath);
             }
             
-            
+            // Video kaydını veritabanından sil
             $video->delete();
             
             return response()->json([
@@ -489,6 +491,7 @@ class ProductController extends Controller
             ]);
             
         } catch (\Exception $e) {
+            \Log::error('Video silme hatası: ' . $e->getMessage());
             return response()->json([
                 'success' => false,
                 'message' => 'Video silinərkən xəta baş verdi'

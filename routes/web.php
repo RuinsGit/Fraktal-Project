@@ -121,9 +121,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/', [ProductController::class, 'index'])->name('index');
             Route::get('/create', [ProductController::class, 'create'])->name('create');
             Route::post('/store', [ProductController::class, 'store'])->name('store');
-            Route::get('/{id}/edit', [ProductController::class, 'edit'])->name('edit');
-            Route::post('/{id}/update', [ProductController::class, 'update'])->name('update');
-            Route::get('/{id}/delete', [ProductController::class, 'destroy'])->name('destroy');
+            Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
+            Route::post('/update/{id}', [ProductController::class, 'update'])->name('update');
+            Route::get('/delete/{id}', [ProductController::class, 'destroy'])->name('destroy');
             Route::get('/{id}/show', [ProductController::class, 'show'])->name('show');
             Route::get('/get-sub-category/{category_id}', [ProductController::class, 'getSubCategory'])
                 ->name('get-sub-category');
