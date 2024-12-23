@@ -17,8 +17,8 @@ class ProductResource extends JsonResource
             'price' => $this->price,
             'discount_percentage' => $this->discount_percentage,
             'discounted_price' => $this->discounted_price,
-            'thumbnail' => $this->thumbnail ? url('uploads/products/' . basename($this->thumbnail)) : null,
-            'preview_video' => $this->preview_video ? url('uploads/products/videos/previews/' . basename($this->preview_video)) : null,
+            'thumbnail' => $this->thumbnail ? url($this->thumbnail) : null,
+            'preview_video' => $this->preview_video ? url($this->preview_video) : null,
             'slug' => $this->slug,
             'category' => new CategoryResource($this->whenLoaded('category')),
             

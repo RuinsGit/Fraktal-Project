@@ -113,11 +113,12 @@ class ProductController extends Controller
             if ($request->hasFile('videos')) {
                 foreach ($request->file('videos') as $key => $video) {
                     $videoName = time() . '_' . $video->getClientOriginalName();
-                    $video->move(public_path('uploads/product-videos'), $videoName);
+                    $uploadPath = 'uploads/product-videos';
+                    $video->move(public_path($uploadPath), $videoName);
 
                     ProductVideo::create([
                         'product_id' => $product->id,
-                        'video_path' => $videoName,
+                        'video_path' => $uploadPath . '/' . $videoName,
                         'title' => $request->video_titles[$key] ?? null,
                         'description' => $request->video_descriptions[$key] ?? null,
                         'order' => $key + 1,
@@ -281,11 +282,12 @@ class ProductController extends Controller
             if ($request->hasFile('videos')) {
                 foreach ($request->file('videos') as $key => $video) {
                     $videoName = time() . '_' . $video->getClientOriginalName();
-                    $video->move(public_path('uploads/product-videos'), $videoName);
+                    $uploadPath = 'uploads/product-videos';
+                    $video->move(public_path($uploadPath), $videoName);
 
                     ProductVideo::create([
                         'product_id' => $product->id,
-                        'video_path' => $videoName,
+                        'video_path' => $uploadPath . '/' . $videoName,
                         'title' => $request->video_titles[$key] ?? null,
                         'description' => $request->video_descriptions[$key] ?? null,
                         'order' => $key + 1,
@@ -480,12 +482,10 @@ class ProductController extends Controller
             $video = ProductVideo::findOrFail($id);
             
             // Video dosyasını sil
-            $videoPath = public_path('uploads/product-videos/' . $video->video_path);
-            if (file_exists($videoPath)) {
-                unlink($videoPath);
+            if (file_exists(public_path($video->video_path))) {
+                unlink(public_path($video->video_path));
             }
             
-            // Video kaydını veritabanından sil
             $video->delete();
             
             return response()->json([

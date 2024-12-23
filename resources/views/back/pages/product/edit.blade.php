@@ -232,7 +232,7 @@
                                                     <tr>
                                                         <td>
                                                             <video width="200" controls>
-                                                                <source src="{{ asset('uploads/product-videos/' . $video->video_path) }}" type="video/mp4">
+                                                                <source src="{{ url($video->video_path) }}" type="video/mp4">
                                                             </video>
                                                         </td>
                                                         <td>{{ $video->title }}</td>
