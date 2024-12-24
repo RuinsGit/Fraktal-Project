@@ -60,14 +60,18 @@ use App\Http\Controllers\Admin\CourseRouteController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if (auth()->check()) {
+        return redirect()->route('admin.product.index');
+    } else {
+        return redirect()->route('admin.login');
+    }
 });
 
 
 Route::prefix('admin')->name('admin.')->group(function () {
     // Main admin route - redirects to the login page
     Route::get('/', function () {
-        return redirect()->route('admin.login');
+        return redirect()->route('admin.product.index');
     });
 
     // ------------------------- Login Routes Started -------------------------
@@ -158,7 +162,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // ------------------------- About Routes Started -------------------------
         Route::get('/about', [AboutController::class, 'index'])->name('about');
-        Route::post('/about/update', [AboutController::class, 'update'])->name('about.update');
+        Route::prefix('admin/about')->name('admin.about.')->group(function () {
+            Route::post('/update', [AboutController::class, 'update'])->name('update');
+        });
 
         
         Route::get('/about', [AboutController::class, 'index'])->name('about');
