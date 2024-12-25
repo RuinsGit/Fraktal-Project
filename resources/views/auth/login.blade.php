@@ -39,7 +39,7 @@
             <div class="w-full max-w-sm">
                 <!-- Logo & Header -->
                 <div class="mb-10">
-                    <img class="h-12 w-auto mb-8" src="{{ asset('auth/assets/images/logo@2x.png') }}" alt="Logo">
+                    <img class="h-12 w-auto mb-8" style="width: 100px; height: 70px;" src="{{ asset('back/assets/images/logo.webp') }}" alt="Logo">
                     <h2 class="text-2xl font-bold text-gray-900">Admin Panel</h2>
                     <p class="mt-2 text-sm text-gray-600">
                         Xoş gəlmisiniz! Zəhmət olmasa məlumatlarınızı daxil edin.

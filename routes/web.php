@@ -48,6 +48,7 @@ use App\Http\Controllers\Admin\CourseRouteController;
 
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -59,14 +60,18 @@ use App\Http\Controllers\Admin\CourseRouteController;
 |
 */
 
+Route::middleware(['guest:admin'])->group(function () {
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/login-handle', [AuthController::class, 'login'])->name('handle-login');
+});
+
 Route::get('/', function () {
     if (auth()->check()) {
         return redirect()->route('admin.product.index');
     } else {
-        return redirect()->route('admin.login');
+        return redirect()->route('login');
     }
 });
-
 
 Route::prefix('admin')->name('admin.')->group(function () {
     // Main admin route - redirects to the login page
@@ -75,7 +80,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
 
     // ------------------------- Login Routes Started -------------------------
-    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login')->middleware('guest:admin');
     Route::post('/login-handle', [AuthController::class, 'login'])->name('handle-login');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     // ------------------------- Login Routes Ended -------------------------
